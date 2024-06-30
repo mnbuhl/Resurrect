@@ -52,7 +52,7 @@ namespace Resurrect.Internals
             {
                 Type = type.AssemblyQualifiedName,
                 Method = method.Name,
-                Parameters = arguments.ToDictionary(p => p.GetType().AssemblyQualifiedName, p => p)
+                Parameters = arguments.ToDictionary(a => a.GetType().AssemblyQualifiedName, a => a)
             };
             
             return function;

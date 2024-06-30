@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -29,9 +30,15 @@ namespace Resurrect.Internals
 
             var parameters = constructorInfo.GetParameters();
             
-            var resolvedParameters = parameters.Select(p => function.Parameters.TryGetValue(p.Name, out var expression) 
-                ? expression 
-                : scope.ServiceProvider.GetRequiredService(p.ParameterType)).ToArray();
+            var resolvedParameters = parameters.Select(p =>
+            {
+                if (p.ParameterType == typeof(IServiceProvider))
+                {
+                    return scope.ServiceProvider;
+                }
+                
+                return _options.ServiceProvider.GetService(p.ParameterType);
+            }).ToArray();
             
             return constructorInfo.Invoke(resolvedParameters);
         }
