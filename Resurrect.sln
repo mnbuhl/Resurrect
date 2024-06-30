@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{C9E97216-60D7-4F0F-8C67-AF7A049E6794}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{0B651297-F1C0-4373-824B-B8F837673365}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "examples", "examples", "{761CDA81-14D9-4384-9534-86B65A047EEA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Resurrect", "src\Resurrect\Resurrect.csproj", "{022CC994-F4CA-4F0B-9A02-C7B7E1EF0FAD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Resurrect.Tests", "tests\Resurrect.Tests\Resurrect.Tests.csproj", "{F7D8C638-01C7-4166-A598-73440CF5EF81}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Resurrect.Examples", "examples\Resurrect.Examples\Resurrect.Examples.csproj", "{73549148-99F3-4187-BBE7-2989CFBB32D2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{022CC994-F4CA-4F0B-9A02-C7B7E1EF0FAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{022CC994-F4CA-4F0B-9A02-C7B7E1EF0FAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{022CC994-F4CA-4F0B-9A02-C7B7E1EF0FAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{022CC994-F4CA-4F0B-9A02-C7B7E1EF0FAD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7D8C638-01C7-4166-A598-73440CF5EF81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7D8C638-01C7-4166-A598-73440CF5EF81}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7D8C638-01C7-4166-A598-73440CF5EF81}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7D8C638-01C7-4166-A598-73440CF5EF81}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73549148-99F3-4187-BBE7-2989CFBB32D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73549148-99F3-4187-BBE7-2989CFBB32D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73549148-99F3-4187-BBE7-2989CFBB32D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73549148-99F3-4187-BBE7-2989CFBB32D2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{022CC994-F4CA-4F0B-9A02-C7B7E1EF0FAD} = {C9E97216-60D7-4F0F-8C67-AF7A049E6794}
+		{F7D8C638-01C7-4166-A598-73440CF5EF81} = {0B651297-F1C0-4373-824B-B8F837673365}
+		{73549148-99F3-4187-BBE7-2989CFBB32D2} = {761CDA81-14D9-4384-9534-86B65A047EEA}
+	EndGlobalSection
+EndGlobal
