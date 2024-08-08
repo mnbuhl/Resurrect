@@ -22,23 +22,23 @@ var serviceProvider = serviceCollection.BuildServiceProvider();
 
 var resurrector = serviceProvider.GetRequiredService<Resurrector>();
 
-var function1 = Resurrector.Serialize<ITestService>(service => service.TestMethod("Hello, World 1!"));
+var function1 = SerializableFunction.Serialize<ITestService>(service => service.TestMethod("Hello, World 1!"));
 var serializedFunction1 = JsonSerializer.Serialize(function1);
 var deserializedFunction1 = JsonSerializer.Deserialize<SerializableFunction>(serializedFunction1);
 resurrector.Invoke(deserializedFunction1);
 
-var function2 = Resurrector.Serialize<TestService>(service => service.TestMethodAsync(new Payload("Hello, World 2!")));
+var function2 = SerializableFunction.Serialize<TestService>(service => service.TestMethodAsync(new Payload("Hello, World 2!")));
 var serializedFunction2 = JsonSerializer.Serialize(function2);
 var deserializedFunction2 = JsonSerializer.Deserialize<SerializableFunction>(serializedFunction2);
 await resurrector.InvokeAsync(deserializedFunction2);
 
-var function3 = Resurrector.Serialize<TestService>(service => service.TestMethodWithReturnValue("Hello, World 3!"));
+var function3 = SerializableFunction.Serialize<TestService>(service => service.TestMethodWithReturnValue("Hello, World 3!"));
 var serializedFunction3 = JsonSerializer.Serialize(function3);
 var deserializedFunction3 = JsonSerializer.Deserialize<SerializableFunction>(serializedFunction3);
 var result = resurrector.Invoke<string>(deserializedFunction3);
 Console.WriteLine(result);
 
-var function4 = Resurrector.Serialize<ITestService>(service => service.TestMethodWithReturnValueAsync(new Payload("Hello, World 4!")));
+var function4 = SerializableFunction.Serialize<ITestService>(service => service.TestMethodWithReturnValueAsync(new Payload("Hello, World 4!")));
 var serializedFunction4 = JsonSerializer.Serialize(function4);
 var deserializedFunction4 = JsonSerializer.Deserialize<SerializableFunction>(serializedFunction4);
 var result2 = await resurrector.InvokeAsync<Payload>(deserializedFunction4);

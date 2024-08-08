@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Reflection;
 using System.Threading.Tasks;
-using Resurrect.Internals;
 
 namespace Resurrect
 {
@@ -14,16 +12,6 @@ namespace Resurrect
         public Resurrector(ResurrectionOptions options)
         {
             _options = options;
-        }
-        
-        public static SerializableFunction Serialize<T>(Expression<Action<T>> expression)
-        {
-            return expression.ToFunction();
-        }
-        
-        public static SerializableFunction Serialize<T>(Expression<Func<T, Task>> expression)
-        {
-            return expression.ToFunction();
         }
 
         public void Invoke(SerializableFunction serializableFunction)
@@ -77,6 +65,9 @@ namespace Resurrect
                              parameters.Keys.ToArray(), 
                              null) 
                          ?? throw new InvalidOperationException("Method could not be found.");
+            
+            if (parameters.Count != method.GetParameters().Length)
+                throw new InvalidOperationException("Parameter count mismatch.");
             
             return new ResurrectedFunction
             {

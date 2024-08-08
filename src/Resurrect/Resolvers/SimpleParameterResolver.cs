@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Resurrect.Resolvers
 {
@@ -13,7 +12,17 @@ namespace Resurrect.Resolvers
         /// <returns></returns>
         public object[] Resolve(Dictionary<Type, object> parameters)
         {
-            return parameters.Values.ToArray();
+            var resolvedParameters = new List<object>();
+            
+            foreach (var parameter in parameters)
+            {
+                var type = parameter.Key;
+                var value = parameter.Value;
+                
+                resolvedParameters.Add(Convert.ChangeType(value, type));
+            }
+
+            return resolvedParameters.ToArray();
         }
     }
 }

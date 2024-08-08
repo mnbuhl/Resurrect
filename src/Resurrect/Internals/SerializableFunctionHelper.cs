@@ -2,33 +2,52 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace Resurrect.Internals
 {
-    internal static class ExpressionExtensions
+    internal static class SerializableFunctionHelper
     {
-        internal static SerializableFunction ToFunction<T>(this Expression<Action<T>> expression)
+        internal static SerializableFunction FromExpression<T>(Expression<Action<T>> expression)
         {
             var methodCallExpression = expression.Body as MethodCallExpression 
                                        ?? throw new InvalidOperationException("Expression is not a method call.");
             
-            return ToFunction(methodCallExpression);
+            return FromExpression(methodCallExpression);
         }
         
-        internal static SerializableFunction ToFunction<T>(this Expression<Func<T, Task>> expression)
+        internal static SerializableFunction FromExpression<T>(Expression<Func<T, Task>> expression)
         {
             var methodCallExpression = expression.Body as MethodCallExpression 
                                        ?? throw new InvalidOperationException("Expression is not a method call.");
             
-            return ToFunction(methodCallExpression);
+            return FromExpression(methodCallExpression);
         }
         
-        private static SerializableFunction ToFunction(MethodCallExpression expression)
+        private static void Validate(MethodInfo method)
+        {
+            if (method == null) throw new ArgumentNullException(nameof(method));
+            
+            var type = method.DeclaringType;
+            var parameters = method.GetParameters();
+
+            if (!method.IsPublic) throw new ResurrectException("Only public methods can be resurrected");
+            if (type == null) throw new NotSupportedException("Functions must be tied to a type to be resurrected");
+
+            foreach (var parameter in parameters)
+            {
+                if (parameter.IsOut || parameter.ParameterType.IsByRef)
+                    throw new NotSupportedException("Parameters with out and ref are not supported");
+            }
+        }
+        
+        private static SerializableFunction FromExpression(MethodCallExpression expression)
         {
             var method = expression.Method;
-            var type = method.DeclaringType 
-                       ?? throw new InvalidOperationException("Method does not have a declaring type.");
+            var type = method.DeclaringType ?? throw new NotSupportedException("Functions must be tied to a type to be resurrected");
+            
+            Validate(method);
 
             var arguments = new List<object>();
             
