@@ -16,43 +16,43 @@ namespace Resurrect
             _options = options;
         }
         
-        public Function ToFunction<T>(Expression<Action<T>> expression)
+        public static SerializableFunction Serialize<T>(Expression<Action<T>> expression)
         {
             return expression.ToFunction();
         }
         
-        public Function ToFunction<T>(Expression<Func<T, Task>> expression)
+        public static SerializableFunction Serialize<T>(Expression<Func<T, Task>> expression)
         {
             return expression.ToFunction();
         }
 
-        public void Invoke(Function function)
+        public void Invoke(SerializableFunction serializableFunction)
         {
-            var resurrectedFunction = Resurrect(function);
+            var resurrectedFunction = Resurrect(serializableFunction);
             var instance = ResolveInstance(resurrectedFunction);
             
             resurrectedFunction.Method.Invoke(instance, resurrectedFunction.Parameters);
         }
         
-        public T Invoke<T>(Function function)
+        public T Invoke<T>(SerializableFunction serializableFunction)
         {
-            var resurrectedFunction = Resurrect(function);
+            var resurrectedFunction = Resurrect(serializableFunction);
             var instance = ResolveInstance(resurrectedFunction);
             
             return (T)resurrectedFunction.Method.Invoke(instance, resurrectedFunction.Parameters);
         }
 
-        public async Task InvokeAsync(Function function)
+        public async Task InvokeAsync(SerializableFunction serializableFunction)
         {
-            var resurrectedFunction = Resurrect(function);
+            var resurrectedFunction = Resurrect(serializableFunction);
             var instance = ResolveInstance(resurrectedFunction);
             
             await (Task)resurrectedFunction.Method.Invoke(instance, resurrectedFunction.Parameters);
         }
         
-        public async Task<T> InvokeAsync<T>(Function function)
+        public async Task<T> InvokeAsync<T>(SerializableFunction serializableFunction)
         {
-            var resurrectedFunction = Resurrect(function);
+            var resurrectedFunction = Resurrect(serializableFunction);
             var instance = ResolveInstance(resurrectedFunction);
             
             return await (Task<T>)resurrectedFunction.Method.Invoke(instance, resurrectedFunction.Parameters);
@@ -61,18 +61,18 @@ namespace Resurrect
         private object ResolveInstance(ResurrectedFunction function)
         {
             var resolver = _options.FunctionResolver;
-            return resolver.ResolveInstance(function);
+            return resolver.ResolveInstance(function.Type);
         }
         
-        private ResurrectedFunction Resurrect(Function function)
+        private ResurrectedFunction Resurrect(SerializableFunction serializableFunction)
         {
-            var type = Type.GetType(function.Type) 
+            var type = Type.GetType(serializableFunction.Type) 
                        ?? throw new InvalidOperationException("Type could not be found.");
             
-            var parameters = function.Parameters.ToDictionary(p => Type.GetType(p.Key), p => p.Value);
+            var parameters = serializableFunction.Parameters.ToDictionary(p => Type.GetType(p.Key), p => p.Value);
             
             var method = type.GetMethod(
-                             function.Method, 
+                             serializableFunction.Method, 
                              BindingFlags.Public|BindingFlags.Instance, null, 
                              parameters.Keys.ToArray(), 
                              null) 

@@ -8,7 +8,7 @@ namespace Resurrect.Internals
 {
     internal static class ExpressionExtensions
     {
-        internal static Function ToFunction<T>(this Expression<Action<T>> expression)
+        internal static SerializableFunction ToFunction<T>(this Expression<Action<T>> expression)
         {
             var methodCallExpression = expression.Body as MethodCallExpression 
                                        ?? throw new InvalidOperationException("Expression is not a method call.");
@@ -16,7 +16,7 @@ namespace Resurrect.Internals
             return ToFunction(methodCallExpression);
         }
         
-        internal static Function ToFunction<T>(this Expression<Func<T, Task>> expression)
+        internal static SerializableFunction ToFunction<T>(this Expression<Func<T, Task>> expression)
         {
             var methodCallExpression = expression.Body as MethodCallExpression 
                                        ?? throw new InvalidOperationException("Expression is not a method call.");
@@ -24,7 +24,7 @@ namespace Resurrect.Internals
             return ToFunction(methodCallExpression);
         }
         
-        private static Function ToFunction(MethodCallExpression expression)
+        private static SerializableFunction ToFunction(MethodCallExpression expression)
         {
             var method = expression.Method;
             var type = method.DeclaringType 
@@ -48,7 +48,7 @@ namespace Resurrect.Internals
                 }
             }
             
-            var function = new Function
+            var function = new SerializableFunction
             {
                 Type = type.AssemblyQualifiedName,
                 Method = method.Name,

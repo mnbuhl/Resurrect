@@ -1,6 +1,6 @@
 ﻿namespace Resurrect.Examples;
 
-public class TestService
+public class TestService : ITestService
 {
     private readonly LoggerService _loggerService;
     
