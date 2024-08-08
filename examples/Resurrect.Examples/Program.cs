@@ -3,21 +3,24 @@
 using System.Text.Json;
 using Microsoft.Extensions.DependencyInjection;
 using Resurrect;
+using Resurrect.AspNetCore.Extensions;
 using Resurrect.Examples;
-using Resurrect.System.Text.Json;
 
 var serviceCollection = new ServiceCollection();
 
+serviceCollection.AddResurrect();
 serviceCollection.AddSingleton<LoggerService>();
 serviceCollection.AddSingleton<TestService>();
 
 var serviceProvider = serviceCollection.BuildServiceProvider();
 
-var resurrector = new Resurrector(new ResurrectionOptions
-{
-    ServiceProvider = serviceProvider,
-    ParameterTypeResolver = new JsonParameterTypeResolver()
-});
+// var resurrector = new Resurrector(new ResurrectionOptions
+// {
+//     FunctionResolver = new ServiceCollectionFunctionResolver(serviceCollection.BuildServiceProvider()),
+//     ParameterTypeResolver = new JsonParameterTypeResolver()
+// });
+
+var resurrector = serviceProvider.GetRequiredService<Resurrector>();
 
 var function1 = resurrector.ToFunction<TestService>(service => service.TestMethod("Hello, World 1!"));
 var serializedFunction1 = JsonSerializer.Serialize(function1);

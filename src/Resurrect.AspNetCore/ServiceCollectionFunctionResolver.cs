@@ -2,32 +2,33 @@
 using System.Linq;
 using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
+using Resurrect.Internals;
 
-namespace Resurrect.Internals
+namespace Resurrect.AspNetCore
 {
-    internal class FunctionResolver
+    public class ServiceCollectionFunctionResolver : IFunctionResolver
     {
-        private readonly ResurrectionOptions _options;
-        
-        public FunctionResolver(ResurrectionOptions options)
+        private readonly IServiceProvider _serviceProvider;
+
+        public ServiceCollectionFunctionResolver(IServiceProvider serviceProvider)
         {
-            _options = options;
+            _serviceProvider = serviceProvider;
         }
-        
-        internal object ResolveInstance(ResurrectedFunction function)
+
+        public object ResolveInstance(ResurrectedFunction function)
         {
             var constructors = function.Type.GetConstructors();
             var constructorInfo =
                 constructors.FirstOrDefault(c => c.GetCustomAttribute<ResurrectConstructorAttribute>() != null) ??
                 constructors.OrderByDescending(c => c.GetParameters().Length).FirstOrDefault();
             
-            if (constructorInfo == null)
+            if (constructorInfo is null)
             {
                 throw new ResurrectException($"No suitable constructor found for {function.Type.Name}");
             }
             
-            var scope = _options.ServiceProvider.CreateScope();
-
+            var scope = _serviceProvider.CreateScope();
+            
             var parameters = constructorInfo.GetParameters();
             
             var resolvedParameters = parameters.Select(p =>
@@ -37,7 +38,7 @@ namespace Resurrect.Internals
                     return scope.ServiceProvider;
                 }
                 
-                return _options.ServiceProvider.GetService(p.ParameterType);
+                return scope.ServiceProvider.GetService(p.ParameterType);
             }).ToArray();
             
             return constructorInfo.Invoke(resolvedParameters);

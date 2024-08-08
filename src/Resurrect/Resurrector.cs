@@ -60,7 +60,7 @@ namespace Resurrect
 
         private object ResolveInstance(ResurrectedFunction function)
         {
-            var resolver = new FunctionResolver(_options);
+            var resolver = _options.FunctionResolver;
             return resolver.ResolveInstance(function);
         }
         
@@ -82,7 +82,7 @@ namespace Resurrect
             {
                 Type = type,
                 Method = method,
-                Parameters = _options.ParameterTypeResolver.Resolve(parameters)
+                Parameters = _options.ParameterResolver.Resolve(parameters)
             };
         }
     }

@@ -1,11 +1,8 @@
-﻿using System;
-
-namespace Resurrect
+﻿namespace Resurrect
 {
     public class ResurrectionOptions
     {
-        // set IoC container
-        public IServiceProvider ServiceProvider { get; set; }
-        public IParameterTypeResolver ParameterTypeResolver { get; set; }
+        public IFunctionResolver FunctionResolver { get; set; }
+        public IParameterResolver ParameterResolver { get; set; }
     }
 }

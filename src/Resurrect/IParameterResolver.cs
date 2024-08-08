@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Resurrect
 {
-    public interface IParameterTypeResolver
+    public interface IParameterResolver
     {
         object[] Resolve(Dictionary<Type, object> parameters);
     }

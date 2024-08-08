@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Reflection;
 
-namespace Resurrect.Internals
+namespace Resurrect
 {
-    internal class ResurrectedFunction
+    public class ResurrectedFunction
     {
         public Type Type { get; set; }
         public MethodInfo Method { get; set; }

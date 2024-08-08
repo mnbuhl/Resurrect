@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Resurrect.Internals
 {
-    internal static class ActionExtensions
+    internal static class ExpressionExtensions
     {
         internal static Function ToFunction<T>(this Expression<Action<T>> expression)
         {

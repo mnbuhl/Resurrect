@@ -12,6 +12,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\src\Resurrect.AspNetCore\Resurrect.AspNetCore.csproj" />
       <ProjectReference Include="..\..\src\Resurrect.System.Text.Json\Resurrect.System.Text.Json.csproj" />
     </ItemGroup>
 

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
 
-namespace Resurrect.System.Text.Json
+namespace Resurrect.AspNetCore
 {
-    public class JsonParameterTypeResolver : IParameterTypeResolver
+    public class JsonParameterResolver : IParameterResolver
     {
         public object[] Resolve(Dictionary<Type, object> parameters)
         {
