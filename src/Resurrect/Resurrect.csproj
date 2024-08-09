@@ -7,5 +7,24 @@
     <PropertyGroup>
         <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
     </PropertyGroup>
-
+    
+    <PropertyGroup>
+        <PackageId>Resurrect</PackageId>
+        <PackageVersion>0.0.1</PackageVersion>
+        <Authors>Mikkel Buhl</Authors>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <RepositoryUrl>https://github.com/mnbuhl/Resurrect</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <PackageProjectUrl>https://github.com/mnbuhl/Resurrect</PackageProjectUrl>
+        <Description>
+            Resurrect is a library for .NET that provides a simple way to serialize functions for storage and deserialize for later execution.
+        </Description>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageTags>resurrect serialize deserialize function</PackageTags>
+        <PackageType>Library</PackageType>
+    </PropertyGroup>
+    
+    <ItemGroup>
+        <None Include="README.md" Pack="true" PackagePath="\" />
+    </ItemGroup>
 </Project>
