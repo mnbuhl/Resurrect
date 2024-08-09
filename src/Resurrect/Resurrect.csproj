@@ -10,7 +10,7 @@
     
     <PropertyGroup>
         <PackageId>Resurrect</PackageId>
-        <PackageVersion>0.0.1</PackageVersion>
+        <PackageVersion>0.0.2</PackageVersion>
         <Authors>Mikkel Buhl</Authors>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <RepositoryUrl>https://github.com/mnbuhl/Resurrect</RepositoryUrl>
@@ -21,7 +21,6 @@
         </Description>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageTags>resurrect serialize deserialize function</PackageTags>
-        <PackageType>Library</PackageType>
     </PropertyGroup>
     
     <ItemGroup>
