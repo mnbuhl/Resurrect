@@ -33,4 +33,4 @@ jobs:
         run: dotnet build ${{ inputs.PROJECT_FOLDER }} --no-restore
 
       - name: Test
-        run: dotnet test ${{ inputs.PROJECT_FOLDER }} --no-build --no-restore --verbosity normal
+        run: dotnet test ${{ inputs.TESTS_FOLDER }} --verbosity normal
