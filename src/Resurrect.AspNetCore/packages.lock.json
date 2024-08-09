@@ -26,6 +26,12 @@
           "Microsoft.NETCore.Platforms": "1.1.0"
         }
       },
+      "Resurrect": {
+        "type": "Direct",
+        "requested": "[0.0.1, )",
+        "resolved": "0.0.1",
+        "contentHash": "/pRImnr8iHjMu4fHlm9nDv6cexGfrHGIV/oQUP2+HOes+0NOXa35tDj2LXRIVDtS3aZb+Va9YVhx6VWW4YCTyQ=="
+      },
       "System.Text.Json": {
         "type": "Direct",
         "requested": "[8.0.4, )",
@@ -175,9 +181,6 @@
         "dependencies": {
           "System.Runtime.CompilerServices.Unsafe": "4.5.3"
         }
-      },
-      "resurrect": {
-        "type": "Project"
       }
     }
   }
