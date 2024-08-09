@@ -1,0 +1,19 @@
+﻿name: Build and test Resurrect.AspNetCore package
+on:
+  push:
+    branches: [ 'main' ]
+    paths: [ 'src/Resurrect.AspNetCore/**', '.github/workflows/build-test-aspnetcore.yml', 'tests/Resurrect.AspNetCore.Tests/**' ]
+  pull_request:
+    branches: [ 'main' ]
+    paths: [ 'src/Resurrect.AspNetCore/**', '.github/workflows/build-test-aspnetcore.yml', 'tests/Resurrect.AspNetCore.Tests/**' ]
+  
+  workflow_dispatch:
+
+jobs:
+  build-test:
+    name: Build and test
+    uses: ./.github/workflows/build-test-reuse.yml
+    secrets: inherit
+    with:
+      PROJECT_FOLDER: 'src/Resurrect.AspNetCore'
+      TESTS_FOLDER: 'tests/Resurrect.AspNetCore.Tests'

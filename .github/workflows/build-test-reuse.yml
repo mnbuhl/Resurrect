@@ -1,0 +1,36 @@
+﻿name: Build and test
+on:
+  workflow_call:
+    inputs:
+      PROJECT_FOLDER:
+        required: true
+        type: string
+        description: "The folder containing the project to build and test"
+      TESTS_FOLDER:
+        required: false
+        type: string
+        description: "The folder containing the tests to run"
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        dotnet-version: [ '8.0.x' ]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ matrix.dotnet-version }}
+
+      - name: Restore dependencies
+        run: dotnet restore ${{ inputs.PROJECT_FOLDER }}
+
+      - name: Build
+        run: dotnet build ${{ inputs.PROJECT_FOLDER }} --no-restore
+
+      - name: Test
+        run: dotnet test ${{ inputs.PROJECT_FOLDER }} --no-build --no-restore --verbosity normal
