@@ -28,9 +28,9 @@
       },
       "Resurrect": {
         "type": "Direct",
-        "requested": "[0.0.1, )",
-        "resolved": "0.0.1",
-        "contentHash": "/pRImnr8iHjMu4fHlm9nDv6cexGfrHGIV/oQUP2+HOes+0NOXa35tDj2LXRIVDtS3aZb+Va9YVhx6VWW4YCTyQ=="
+        "requested": "[0.0.2, )",
+        "resolved": "0.0.2",
+        "contentHash": "HmhQvrqXK8RUvOTfROba8gNCrzfoMjY8wftWgCt2DVDQLIm1R/s3LBnL3kOZ3mcjCvn4O5RijUBzpzQIWLVzsQ=="
       },
       "System.Text.Json": {
         "type": "Direct",
