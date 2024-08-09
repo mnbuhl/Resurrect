@@ -12,6 +12,8 @@ namespace Resurrect
         public string Type { get; set; } = string.Empty;
         public string Method { get; set; } = string.Empty;
         public Dictionary<string, object> Parameters { get; set; } = new Dictionary<string, object>();
+        public string ReturnType { get; set; } = string.Empty;
+        public bool Async { get; set; }
         
         public static SerializableFunction Serialize<T>(Expression<Action<T>> expression)
         {
