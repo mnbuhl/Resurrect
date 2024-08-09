@@ -1,0 +1,26 @@
+﻿<?xml version="1.0"?>
+<package>
+    <metadata>
+        <id>Resurrect</id>
+<!--        <version>0.0.1</version>-->
+        <authors>Mikkel Buhl</authors>
+        <summary>Serialize and deserialize functions for later execution</summary>
+        <description>
+            Resurrect is a library for .NET that provides a simple way to serialize functions for storage and deserialize for later execution.
+        </description>
+        <license type="expression">MIT</license>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <repository type="git">https://github.com/mnbuhl/Resurrect</repository>
+        <projectUrl>https://github.com/mnbuhl/Resurrect</projectUrl>
+        <readme>README.md</readme>
+        <tags>resurrect serialize deserialize function</tags>
+        
+        <packageTypes>
+            <packageType name="Library" />
+        </packageTypes>
+        
+    </metadata>
+    <files>
+        <file src="README.md" />
+    </files>
+</package>
