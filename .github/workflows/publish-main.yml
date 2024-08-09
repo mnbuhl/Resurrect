@@ -1,0 +1,17 @@
+﻿name: Publish Resurrect NuGet package to NuGet
+on:
+  workflow_run:
+    workflows: ['Build and test Resurrect package']
+    types: ['completed']
+    branches: ['main']
+  workflow_dispatch: 
+
+jobs:
+  publish:
+    name: Publish to NuGet
+    # check if it is workflow_dispatch or verify workflow is completed
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
+    uses: ./.github/workflows/publish-reuse.yml
+    secrets: inherit
+    with:
+      PROJECT_FOLDER: 'src/Resurrect'

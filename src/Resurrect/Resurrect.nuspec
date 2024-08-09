@@ -2,7 +2,7 @@
 <package>
     <metadata>
         <id>Resurrect</id>
-<!--        <version>0.0.1</version>-->
+        <version>0.0.1</version>
         <authors>Mikkel Buhl</authors>
         <summary>Serialize and deserialize functions for later execution</summary>
         <description>

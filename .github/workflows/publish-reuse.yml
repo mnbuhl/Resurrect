@@ -1,0 +1,31 @@
+﻿name: Publish NuGet package to NuGet
+on:
+  workflow_call: 
+    inputs:
+      PROJECT_FOLDER:
+        required: true
+        type: string
+        description: "The folder containing the project to publish"
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        dotnet-version: [ '8.0.x' ]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+  
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ matrix.dotnet-version }}
+          
+      - name: Pack NuGet package
+        run: dotnet pack --configuration Release ${{ inputs.PROJECT_FOLDER }} --output ./artifacts
+        
+      - name: Publish NuGet package
+        run: dotnet nuget push ./artifacts/*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }}
