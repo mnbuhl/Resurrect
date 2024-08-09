@@ -1,4 +1,4 @@
-﻿name: Publish Resurrect NuGet package to NuGet
+﻿name: Publish Resurrect.AspNetCore NuGet package to NuGet
 on:
   workflow_run:
     workflows: ['Build and test Resurrect.AspNetCore package']

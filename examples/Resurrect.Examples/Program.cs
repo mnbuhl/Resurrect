@@ -14,12 +14,6 @@ serviceCollection.AddSingleton<ITestService, TestService>();
 
 var serviceProvider = serviceCollection.BuildServiceProvider();
 
-// var resurrector = new Resurrector(new ResurrectionOptions
-// {
-//     FunctionResolver = new ServiceCollectionFunctionResolver(serviceCollection.BuildServiceProvider()),
-//     ParameterTypeResolver = new JsonParameterTypeResolver()
-// });
-
 var resurrector = serviceProvider.GetRequiredService<Resurrector>();
 
 var function1 = SerializableFunction.Serialize<ITestService>(service => service.TestMethod("Hello, World 1!"));
